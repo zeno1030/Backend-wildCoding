@@ -43,5 +43,18 @@ public class Article extends BaseEntity {
 	@JoinColumn(name = "member_id", referencedColumnName = "id", nullable = false)
 	private Member member;
 
+	public ArticleDto toDto() {
+		return new ArticleDto(
+			this.id,
+			this.title,
+			this.content,
+			this.hashtag,
+			this.writer,
+			this.getCreatedAt()
+		);
+	}
+
+
+
 }
 

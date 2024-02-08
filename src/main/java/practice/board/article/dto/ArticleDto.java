@@ -2,15 +2,12 @@ package practice.board.article.dto;
 
 import java.time.LocalDateTime;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.querydsl.core.annotations.QueryProjection;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class ArticleDto {
 
 	private Long id;
@@ -20,4 +17,12 @@ public class ArticleDto {
 	private String writer;
 	private LocalDateTime createdAt;
 
+	public ArticleDto(Long id, String title, String content, String hashtag, String writer, LocalDateTime createdAt) {
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.hashtag = hashtag;
+		this.writer = writer;
+		this.createdAt = createdAt;
+	}
 }
