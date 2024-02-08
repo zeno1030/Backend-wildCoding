@@ -1,0 +1,22 @@
+package practice.board.article;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+import practice.board.article.dto.ArticleDto;
+import practice.board.article.dto.ArticleSearchDto;
+import practice.board.article.service.ArticleServiceImpl;
+
+@RestController
+@RequiredArgsConstructor
+public class ArticleController {
+	private final ArticleServiceImpl articleService;
+
+	@GetMapping("/api/v1/article")
+	public List<ArticleDto> searchArticle(ArticleSearchDto searchDto) {
+		return articleService.findArticle(searchDto);
+	}
+}

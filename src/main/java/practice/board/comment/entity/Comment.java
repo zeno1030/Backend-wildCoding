@@ -1,4 +1,4 @@
-package practice.board.article;
+package practice.board.comment.entity;
 
 import java.time.LocalDateTime;
 
@@ -12,33 +12,33 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import practice.board.article.entity.Article;
 import practice.board.base.BaseEntity;
-import practice.board.member.Member;
+import practice.board.member.entity.Member;
 
 @Entity
 @Getter
-@Table(name = "article")
-public class Article extends BaseEntity {
+@Table(name = "comment")
+public class Comment extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "title", nullable = false)
-	private String title;
-
 	@Column(name = "content", nullable = false, length = 65535)
 	private String content;
 
-	@Column(name = "hashtag")
-	private String hashtag;
-
-	@Column(name = "writer", nullable = false, length = 100)
-	private String writer;
+	@Column(name = "comment_writer", nullable = false, length = 100)
+	private String commentWriter;
 
 	@Column(name = "deleted_at")
 	private LocalDateTime deletedAt;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "article_id")
+	private Article article;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id")
 	private Member member;
+
 }
