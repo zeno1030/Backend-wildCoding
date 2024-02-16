@@ -1,16 +1,15 @@
 package practice.board.article.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import practice.board.article.dto.ArticleDto;
 import practice.board.article.dto.ArticleSearchDto;
 import practice.board.article.entity.Article;
 import practice.board.article.repository.ArticleRepository;
+import practice.board.member.repository.MemberRepository;
 
 @Service
 @Transactional
@@ -18,11 +17,23 @@ import practice.board.article.repository.ArticleRepository;
 public class ArticleServiceImpl implements ArticleService {
 
 	private final ArticleRepository articleRepository;
+	private final MemberRepository memberRepository;
+
 	@Override
-	public List<ArticleDto> findArticle(ArticleSearchDto articleSearchDto) {
-		return articleRepository.findAllByWriter(articleSearchDto.getWriter())
-			.stream()
-			.map(Article::toDto) // 인스턴스 메소드 참조를 위해 람다 표현식 사용
-			.collect(Collectors.toList());
+	public List<Article> findArticle(ArticleSearchDto articleSearchDto) {
+		return articleRepository.findAllByWriter(articleSearchDto.getWriter());
 	}
+
+	// @Override
+	// public Article saveArticle(ArticleCreateDto articleCreateDto) {
+	// 	Member member = memberRepository.findNameById(String.valueOf(articleCreateDto.getMemberId()))
+	// 		.orElseThrow(() -> new IllegalArgumentException("Invalid member ID: " + articleCreateDto.getMemberId()));
+	// 	Article article = Article.createArticle();
+	// 	article.setTitle(article.getTitle());
+	// 	article.setContent(article.getContent());
+	// 	article.setHashtag(article.getHashtag());
+	// 	article.setWriter(article.getWriter());
+	// 	article.getMemberId();
+	// 	return articleRepository.save(article);
+	// }
 }

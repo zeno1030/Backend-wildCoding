@@ -11,17 +11,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
-import practice.board.article.dto.ArticleDto;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import practice.board.article.dto.ArticleCreateDto;
 import practice.board.base.BaseEntity;
 import practice.board.member.entity.Member;
 
 @Entity
-@Getter
 @Table(name = "article")
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article extends BaseEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "title", nullable = false)
@@ -41,20 +46,13 @@ public class Article extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", referencedColumnName = "id", nullable = false)
-	private Member member;
+	private Member memberId;
 
-	public ArticleDto toDto() {
-		return new ArticleDto(
-			this.id,
-			this.title,
-			this.content,
-			this.hashtag,
-			this.writer,
-			this.getCreatedAt()
-		);
+	public Article(String writer) {
+		this.writer = writer;
 	}
-
-
-
+	public static Article toEntity(ArticleCreateDto articleCreateDto) {
+		return new Article(articleCreateDto.getWriter());
+	}
 }
 

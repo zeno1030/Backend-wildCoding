@@ -1,3 +1,15 @@
 ### 작성자로 게시글 찾기
-GET localhost:8080/api/v1/article?writer=권지환2
+GET localhost:8080/api/v1/article?writer=권지환
 Content-Type: application/json
+
+### article 게시하기
+POST localhost:8080/api/v1/write
+Content-Type: application/json
+
+{
+  "title": "테스트",
+  "content": "테스트",
+  "hashtag": "테스트",
+  "writer": "테스트",
+  "member": "zeno10302"
+}

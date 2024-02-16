@@ -35,7 +35,7 @@ public class QArticle extends EntityPathBase<Article> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final practice.board.member.entity.QMember member;
+    public final practice.board.member.entity.QMember memberId;
 
     public final StringPath title = createString("title");
 
@@ -62,7 +62,7 @@ public class QArticle extends EntityPathBase<Article> {
 
     public QArticle(Class<? extends Article> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new practice.board.member.entity.QMember(forProperty("member")) : null;
+        this.memberId = inits.isInitialized("memberId") ? new practice.board.member.entity.QMember(forProperty("memberId")) : null;
     }
 
 }
