@@ -1,4 +1,4 @@
-package practice.board.article.dto;
+package practice.board.article.entity.dto;
 
 import lombok.Data;
 

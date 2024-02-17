@@ -15,7 +15,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import practice.board.article.dto.ArticleCreateDto;
+import practice.board.article.entity.dto.ArticleCreate;
 import practice.board.base.BaseEntity;
 import practice.board.member.entity.Member;
 
@@ -48,11 +48,19 @@ public class Article extends BaseEntity {
 	@JoinColumn(name = "member_id", referencedColumnName = "id", nullable = false)
 	private Member memberId;
 
-	public Article(String writer) {
+	public Article(String title, String content, String hashtag, String writer) {
+		this.title = title;
+		this.content = content;
+		this.hashtag = hashtag;
 		this.writer = writer;
 	}
-	public static Article toEntity(ArticleCreateDto articleCreateDto) {
-		return new Article(articleCreateDto.getWriter());
+
+	public static Article toEntity(ArticleCreate articleCreate) {
+		return new Article(
+			articleCreate.getTitle(),
+			articleCreate.getContent(),
+			articleCreate.getHashtag(),
+			articleCreate.getWriter());
 	}
 }
 

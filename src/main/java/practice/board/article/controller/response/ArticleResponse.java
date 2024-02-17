@@ -1,8 +1,6 @@
 package practice.board.article.controller.response;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -19,16 +17,13 @@ public class ArticleResponse {
 	private String writer;
 	private LocalDateTime createdAt;
 
-	public static List<ArticleResponse> toResponse(List<Article> articles) {
-		return articles.stream().map(article ->
-			ArticleResponse.builder()
-				.id(article.getId())
-				.writer(article.getWriter())
-				.title(article.getTitle())
-				.content(article.getContent())
-				.hashtag(article.getHashtag())
-				.createdAt(article.getCreatedAt())
-				.build()
-		).collect(Collectors.toList());
+	public static ArticleResponse toResponse(Article article) {
+		return ArticleResponse.builder()
+			.id(article.getId())
+			.title(article.getTitle())
+			.content(article.getContent())
+			.hashtag(article.getHashtag())
+			.writer(article.getWriter())
+			.createdAt(article.getCreatedAt()).build();
 	}
 }
