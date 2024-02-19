@@ -1,8 +1,9 @@
 package practice.board.article.repository;
 
 import static practice.board.article.entity.QArticle.*;
+import static practice.board.member.entity.QMember.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import jakarta.persistence.EntityManager;
-import practice.board.article.entity.Article;
-import practice.board.article.entity.QArticle;
+import practice.board.article.controller.response.ArticleResponse;
+import practice.board.article.controller.response.QArticleResponse;
 
 @Repository
 public class ArticleQueryRepository {
@@ -22,15 +23,23 @@ public class ArticleQueryRepository {
 		this.em = em;
 		this.jpaQueryFactory = new JPAQueryFactory(em);
 	}
-	public List<Article> getDiary(LocalDateTime createdAt) {
+
+	public List<ArticleResponse> getArticle(LocalDate createdAt) {
 		return jpaQueryFactory.select(
-				article.id,
-				article.content,
-				article.hashtag,
-				article.writer,
-				article.title,
-				article.createdAt)
+				new QArticleResponse(
+					article.id,
+					article.title,
+					article.content,
+					article.hashtag,
+					article.writer,
+					article.createdAt,
+					member.count,
+					member.name
+				))
 			.from(article)
-			.where()
+			.leftJoin(article.memberId, member)
+			.where(article.createdAt.goe(createdAt.atStartOfDay()))
+			.fetch();
 	}
+
 }

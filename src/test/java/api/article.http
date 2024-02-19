@@ -2,6 +2,12 @@
 GET localhost:8080/api/v1/article?writer=권지환
 Content-Type: application/json
 
+###작성일로 게실글찾기(queryDSL 사용)
+GET localhost:8080/api/v1/articleQuery?createdAt=2024-02-08
+Content-Type: application/json
+
+
+
 ### article 게시하기
 POST localhost:8080/article
 Content-Type: application/json

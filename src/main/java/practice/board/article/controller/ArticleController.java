@@ -1,14 +1,17 @@
 package practice.board.article.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -31,6 +34,14 @@ public class ArticleController {
 		return articles.stream()
 			.map(ArticleResponse::toResponse)
 			.collect(Collectors.toList());
+	}
+
+	@GetMapping("/api/v1/articleQuery")
+	public List<ArticleResponse> getArticle(
+		@RequestParam("createdAt")
+		@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+		LocalDate createdAt) {
+		return articleService.getArticle(createdAt);
 	}
 
 	@PostMapping("/article")
