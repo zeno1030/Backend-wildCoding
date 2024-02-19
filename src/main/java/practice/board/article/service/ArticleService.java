@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import practice.board.article.controller.response.ArticleResponse;
 import practice.board.article.entity.Article;
 import practice.board.article.entity.dto.ArticleCreate;
-import practice.board.article.entity.dto.ArticleSearchDto;
+import practice.board.article.entity.dto.ArticleSearch;
 
 @Service
 public interface ArticleService {
 	//작성자로 게시글 찾기
-	List<Article> findArticle(ArticleSearchDto articleSearchDto);
+	List<Article> findArticle(ArticleSearch articleSearch);
 
 	List<ArticleResponse> getArticle(LocalDate createdAt);
 

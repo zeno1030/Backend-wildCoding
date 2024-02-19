@@ -10,30 +10,31 @@ import lombok.RequiredArgsConstructor;
 import practice.board.article.controller.response.ArticleResponse;
 import practice.board.article.entity.Article;
 import practice.board.article.entity.dto.ArticleCreate;
-import practice.board.article.entity.dto.ArticleSearchDto;
+import practice.board.article.entity.dto.ArticleSearch;
 import practice.board.article.repository.ArticleQueryRepository;
-import practice.board.article.repository.ArticleRepository;
+import practice.board.article.repository.ArticleReadRepository;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService {
 
-	private final ArticleRepository articleRepository;
-	private final ArticleQueryRepository queryRepository;
+	private final ArticleQueryRepository articleQueryRepository;
+	private final ArticleReadRepository articleReadRepository;
 
 	@Override
-	public List<Article> findArticle(ArticleSearchDto articleSearchDto) {
-		return articleRepository.findAllByWriter(articleSearchDto.getWriter());
+	public List<Article> findArticle(ArticleSearch articleSearch) {
+		return articleQueryRepository.findAllByWriter(articleSearch.getWriter());
 	}
 
 	@Override
 	public List<ArticleResponse> getArticle(LocalDate createdAt) {
-		return queryRepository.getArticle(createdAt);
+		return articleReadRepository.getArticle(createdAt);
 	}
 
 	@Override
+	@Transactional
 	public Article create(ArticleCreate articleCreate) {
-		return articleRepository.save(Article.toEntity(articleCreate));
+		return articleQueryRepository.save(Article.toEntity(articleCreate));
 	}
 }

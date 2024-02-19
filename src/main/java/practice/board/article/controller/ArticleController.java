@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 import practice.board.article.controller.response.ArticleResponse;
 import practice.board.article.entity.Article;
 import practice.board.article.entity.dto.ArticleCreate;
-import practice.board.article.entity.dto.ArticleSearchDto;
+import practice.board.article.entity.dto.ArticleSearch;
 import practice.board.article.service.ArticleServiceImpl;
 
 @RestController
@@ -29,8 +29,8 @@ public class ArticleController {
 	private final ArticleServiceImpl articleService;
 
 	@GetMapping("/api/v1/article")
-	public List<ArticleResponse> searchArticle(@ModelAttribute ArticleSearchDto articleSearchDto) {
-		List<Article> articles = articleService.findArticle(articleSearchDto);
+	public List<ArticleResponse> searchArticle(@ModelAttribute ArticleSearch articleSearch) {
+		List<Article> articles = articleService.findArticle(articleSearch);
 		return articles.stream()
 			.map(ArticleResponse::toResponse)
 			.collect(Collectors.toList());
