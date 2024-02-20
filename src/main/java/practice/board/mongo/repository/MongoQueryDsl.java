@@ -4,6 +4,6 @@ import java.util.List;
 
 import practice.board.mongo.controller.RandomResponse;
 
-public interface RandomReadRepository {
+public interface MongoQueryDsl {
 	List<RandomResponse> getByQueryDsl(Long value);
 }

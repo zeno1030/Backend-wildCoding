@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 import practice.board.mongo.controller.RandomResponse;
 
 @Repository
-public class RandomReadRepositoryImpl extends QuerydslRepositorySupport implements RandomReadRepository {
+public class MongoQueryDslImpl extends QuerydslRepositorySupport implements MongoQueryDsl {
 
-	public RandomReadRepositoryImpl(MongoOperations operations) {
+	public MongoQueryDslImpl(MongoOperations operations) {
 		super(operations);
 	}
 

@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import practice.board.mongo.controller.RandomResponse;
-import practice.board.mongo.repository.RandomReadRepository;
+import practice.board.mongo.repository.MongoQueryDsl;
 
 @Service
 @RequiredArgsConstructor
-public class MongoService {
-	private final RandomReadRepository repository;
+public class QueryDslService {
+	private final MongoQueryDsl repository;
 
-	public List<RandomResponse> getMongo(Long value) {
+	public List<RandomResponse> getByQueryDsl(Long value) {
 		return repository.getByQueryDsl(value);
 	}
 

@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import practice.board.mongo.service.CriteriaService;
-import practice.board.mongo.service.MongoService;
+import practice.board.mongo.service.QueryDslService;
 
 @RestController
 @RequiredArgsConstructor
 public class MongoController {
-	private final MongoService mongoService;
+	private final QueryDslService queryDslService;
 	private final CriteriaService criteriaService;
 
 	@GetMapping("/mongo/query")
 	public List<RandomResponse> getMongo(@RequestParam(name = "value") Long value) {
-		return mongoService.getMongo(value);
+		return queryDslService.getByQueryDsl(value);
 	}
 
 	@GetMapping("/mongo/criteria")
