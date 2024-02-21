@@ -20,13 +20,13 @@ import practice.board.article.controller.response.ArticleResponse;
 import practice.board.article.entity.Article;
 import practice.board.article.entity.dto.ArticleCreate;
 import practice.board.article.entity.dto.ArticleSearch;
-import practice.board.article.service.ArticleServiceImpl;
+import practice.board.article.service.ArticleService;
 
 @RestController
 @RequiredArgsConstructor
 public class ArticleController {
 
-	private final ArticleServiceImpl articleService;
+	private final ArticleService articleService;
 
 	@GetMapping("/api/v1/article")
 	public List<ArticleResponse> searchArticle(@ModelAttribute ArticleSearch articleSearch) {

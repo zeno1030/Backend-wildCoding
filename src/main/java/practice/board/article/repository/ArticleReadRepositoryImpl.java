@@ -13,6 +13,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import practice.board.article.controller.response.ArticleResponse;
 import practice.board.article.controller.response.QArticleResponse;
+import practice.board.article.service.port.ArticleReadRepository;
 
 @Repository
 public class ArticleReadRepositoryImpl implements ArticleReadRepository {

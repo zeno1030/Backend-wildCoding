@@ -11,20 +11,20 @@ import practice.board.article.controller.response.ArticleResponse;
 import practice.board.article.entity.Article;
 import practice.board.article.entity.dto.ArticleCreate;
 import practice.board.article.entity.dto.ArticleSearch;
-import practice.board.article.repository.ArticleQueryRepository;
-import practice.board.article.repository.ArticleReadRepository;
+import practice.board.article.repository.ArticleQueryJpaRepository;
+import practice.board.article.service.port.ArticleReadRepository;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService {
 
-	private final ArticleQueryRepository articleQueryRepository;
+	private final ArticleQueryJpaRepository articleQueryJpaRepository;
 	private final ArticleReadRepository articleReadRepository;
 
 	@Override
 	public List<Article> findArticle(ArticleSearch articleSearch) {
-		return articleQueryRepository.findAllByWriter(articleSearch.getWriter());
+		return articleQueryJpaRepository.findAllByWriter(articleSearch.getWriter());
 	}
 
 	@Override
@@ -35,6 +35,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	@Transactional
 	public Article create(ArticleCreate articleCreate) {
-		return articleQueryRepository.save(Article.toEntity(articleCreate));
+		return articleQueryJpaRepository.save(Article.toEntity(articleCreate));
 	}
 }

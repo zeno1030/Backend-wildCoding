@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import practice.board.article.entity.Article;
 
 @Repository
-public interface ArticleQueryRepository extends JpaRepository<Article, Long> {
+public interface ArticleQueryJpaRepository extends JpaRepository<Article, Long> {
 	List<Article> findAllByWriter(String writer);
 }

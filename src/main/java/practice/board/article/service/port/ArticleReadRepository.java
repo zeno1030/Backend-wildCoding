@@ -1,4 +1,4 @@
-package practice.board.article.repository;
+package practice.board.article.service.port;
 
 import java.time.LocalDate;
 import java.util.List;
