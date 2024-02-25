@@ -11,10 +11,6 @@ class ArticleServiceTest {
 
 	@Test
 	void findArticle() {
-		//given
-		
-		//when
-		//then
 	}
 
 }
