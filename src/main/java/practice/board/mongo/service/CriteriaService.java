@@ -11,6 +11,7 @@ import practice.board.mongo.repository.MongoCriteria;
 @Service
 @RequiredArgsConstructor
 public class CriteriaService {
+	
 	private final MongoCriteria mongoCriteria;
 
 	public List<RandomResponse> getByCriteria(Long value) {
