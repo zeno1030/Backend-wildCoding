@@ -9,7 +9,7 @@ import lombok.Getter;
 import practice.board.article.entity.Article;
 
 @Getter
-@Builder
+@Builder // 빌더의 사용이유를 알 필요가 있어보임
 public class ArticleResponse {
 
 	private Long id;
